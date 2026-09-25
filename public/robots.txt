@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gym-web-wine-delta.vercel.app/sitemap.xml

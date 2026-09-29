@@ -8,13 +8,33 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Background image — LCP element: responsive WebP with fetchpriority */}
       <div className="absolute inset-0">
-        <img
-          src="/images/hero.jpg"
-          alt="Premium gym interior"
-          className="w-full h-full object-cover"
-        />
+        <picture>
+          <source
+            media="(max-width: 480px)"
+            srcSet="/images/hero-mobile.webp"
+            type="image/webp"
+          />
+          <source
+            media="(max-width: 768px)"
+            srcSet="/images/hero-tablet.webp"
+            type="image/webp"
+          />
+          <source
+            srcSet="/images/hero-desktop.webp"
+            type="image/webp"
+          />
+          <img
+            src="/images/hero.jpg"
+            alt="Premium gym interior"
+            className="w-full h-full object-cover"
+            fetchPriority="high"
+            decoding="sync"
+            width={1376}
+            height={768}
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-matte/70 via-matte/60 to-matte" />
         <div className="absolute inset-0 bg-gradient-to-r from-matte/50 to-transparent" />
       </div>

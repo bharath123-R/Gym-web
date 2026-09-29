@@ -80,14 +80,48 @@
     content="https://ironfit-fitness.vercel.app/og-image.jpg"
   />
 
-  <!-- Fonts -->
+  <!-- Preload LCP hero image — mobile-first (most users on mobile) -->
+  <link
+    rel="preload"
+    as="image"
+    type="image/webp"
+    href="/images/hero-mobile.webp"
+    media="(max-width: 480px)"
+    fetchpriority="high"
+  />
+  <link
+    rel="preload"
+    as="image"
+    type="image/webp"
+    href="/images/hero-tablet.webp"
+    media="(min-width: 481px) and (max-width: 768px)"
+    fetchpriority="high"
+  />
+  <link
+    rel="preload"
+    as="image"
+    type="image/webp"
+    href="/images/hero-desktop.webp"
+    media="(min-width: 769px)"
+    fetchpriority="high"
+  />
+
+  <!-- Fonts — reduced to actually used weights only -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap"
     rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
   />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
 </head>
 
 <body>

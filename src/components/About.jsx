@@ -19,11 +19,18 @@ export default function About() {
           className="relative"
         >
           <div className="rounded-2xl overflow-hidden">
-            <img
-              src="/images/about.jpg"
-              alt="Modern gym training area"
-              className="w-full h-[280px] sm:h-[360px] md:h-[400px] lg:h-[480px] object-cover"
-            />
+            <picture>
+              <source srcSet="/images/about.webp" type="image/webp" />
+              <img
+                src="/images/about.jpg"
+                alt="Modern gym training area"
+                className="w-full h-[280px] sm:h-[360px] md:h-[400px] lg:h-[480px] object-cover"
+                loading="lazy"
+                decoding="async"
+                width={800}
+                height={597}
+              />
+            </picture>
           </div>
           {/* Decorative accent */}
           <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-slate/30 rounded-2xl -z-10" />

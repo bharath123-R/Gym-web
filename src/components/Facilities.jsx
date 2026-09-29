@@ -2,10 +2,10 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const facilities = [
-  { title: 'Modern Equipment', image: '/images/facility-equipment.jpg' },
-  { title: 'Cardio Zone', image: '/images/facility-cardio.jpg' },
-  { title: 'Locker Room', image: '/images/facility-locker.jpg' },
-  { title: 'Training Area', image: '/images/facility-training.jpg' },
+  { title: 'Modern Equipment', image: '/images/facility-equipment.webp', fallback: '/images/facility-equipment.jpg' },
+  { title: 'Cardio Zone', image: '/images/facility-cardio.webp', fallback: '/images/facility-cardio.jpg' },
+  { title: 'Locker Room', image: '/images/facility-locker.webp', fallback: '/images/facility-locker.jpg' },
+  { title: 'Training Area', image: '/images/facility-training.webp', fallback: '/images/facility-training.jpg' },
 ];
 
 export default function Facilities() {
@@ -36,11 +36,18 @@ export default function Facilities() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="relative rounded-2xl overflow-hidden group cursor-default h-[180px] sm:h-[240px] md:h-[300px]"
             >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
+              <picture>
+                <source srcSet={item.image} type="image/webp" />
+                <img
+                  src={item.fallback}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={448}
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-matte/80 via-matte/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6">
                 <h3 className="font-heading text-sm sm:text-lg md:text-xl font-bold text-crisp">{item.title}</h3>

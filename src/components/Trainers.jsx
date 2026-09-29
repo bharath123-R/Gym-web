@@ -3,9 +3,9 @@ import { motion, useInView } from 'framer-motion';
 import { FiInstagram } from 'react-icons/fi';
 
 const trainers = [
-  { name: 'Arjun Kumar', role: 'Strength Coach', exp: '8+ Years Experience', image: '/images/trainer1.jpg' },
-  { name: 'Rahul Raj', role: 'Fitness Coach', exp: '6+ Years Experience', image: '/images/trainer2.jpg' },
-  { name: 'Priya S', role: 'Fitness Trainer', exp: '5+ Years Experience', image: '/images/trainer3.jpg' },
+  { name: 'Arjun Kumar', role: 'Strength Coach', exp: '8+ Years Experience', image: '/images/trainer1.webp', fallback: '/images/trainer1.jpg' },
+  { name: 'Rahul Raj', role: 'Fitness Coach', exp: '6+ Years Experience', image: '/images/trainer2.webp', fallback: '/images/trainer2.jpg' },
+  { name: 'Priya S', role: 'Fitness Trainer', exp: '5+ Years Experience', image: '/images/trainer3.webp', fallback: '/images/trainer3.jpg' },
 ];
 
 export default function Trainers() {
@@ -37,11 +37,18 @@ export default function Trainers() {
               className="glass-card overflow-hidden group"
             >
               <div className="relative overflow-hidden">
-                <img
-                  src={trainer.image}
-                  alt={trainer.name}
-                  className="w-full h-[240px] sm:h-[320px] md:h-[380px] lg:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+                <picture>
+                  <source srcSet={trainer.image} type="image/webp" />
+                  <img
+                    src={trainer.fallback}
+                    alt={trainer.name}
+                    className="w-full h-[240px] sm:h-[320px] md:h-[380px] lg:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={804}
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-matte/90 via-transparent to-transparent" />
 
                 {/* Hover overlay */}

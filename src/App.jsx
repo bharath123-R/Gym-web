@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
 import About from './components/About';
 import Programs from './components/Programs';
-import Trainers from './components/Trainers';
-import Pricing from './components/Pricing';
-import Facilities from './components/Facilities';
-import Gallery from './components/Gallery';
-import Testimonials from './components/Testimonials';
-import BmiCalculator from './components/BmiCalculator';
-import Faq from './components/Faq';
 
-import WhatsAppButton from './components/WhatsAppButton';
-import Location from './components/Location';
-import Footer from './components/Footer';
+// Lazy-load below-fold components — they won't affect LCP/FCP
+const Trainers = lazy(() => import('./components/Trainers'));
+const Pricing = lazy(() => import('./components/Pricing'));
+const Facilities = lazy(() => import('./components/Facilities'));
+const Gallery = lazy(() => import('./components/Gallery'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const BmiCalculator = lazy(() => import('./components/BmiCalculator'));
+const Faq = lazy(() => import('./components/Faq'));
+const Location = lazy(() => import('./components/Location'));
+const Footer = lazy(() => import('./components/Footer'));
+const WhatsAppButton = lazy(() => import('./components/WhatsAppButton'));
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -47,17 +48,21 @@ export default function App() {
         <Stats />
         <About />
         <Programs />
-        <Trainers />
-        <Pricing />
-        <Facilities />
-        <Gallery />
-        <Testimonials />
-        <BmiCalculator />
-        <Faq />
-        <Location />
+        <Suspense fallback={null}>
+          <Trainers />
+          <Pricing />
+          <Facilities />
+          <Gallery />
+          <Testimonials />
+          <BmiCalculator />
+          <Faq />
+          <Location />
+        </Suspense>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      <Suspense fallback={null}>
+        <Footer />
+        <WhatsAppButton />
+      </Suspense>
     </div>
   );
 }

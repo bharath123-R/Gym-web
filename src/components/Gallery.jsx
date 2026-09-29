@@ -3,14 +3,14 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Lightbox from './Lightbox';
 
 const images = [
-  { src: '/images/gallery-gym1.jpg', category: 'gym', alt: 'Gym interior' },
-  { src: '/images/gallery-training1.jpg', category: 'training', alt: 'Barbell training' },
-  { src: '/images/gallery-equipment1.jpg', category: 'equipment', alt: 'Dumbbells closeup' },
-  { src: '/images/gallery-training2.jpg', category: 'training', alt: 'Battle ropes workout' },
-  { src: '/images/facility-equipment.jpg', category: 'equipment', alt: 'Weight room' },
-  { src: '/images/facility-cardio.jpg', category: 'gym', alt: 'Cardio zone' },
-  { src: '/images/facility-training.jpg', category: 'training', alt: 'Functional training area' },
-  { src: '/images/about.jpg', category: 'gym', alt: 'Training floor' },
+  { src: '/images/gallery-gym1.webp', fallback: '/images/gallery-gym1.jpg', category: 'gym', alt: 'Gym interior' },
+  { src: '/images/gallery-training1.webp', fallback: '/images/gallery-training1.jpg', category: 'training', alt: 'Barbell training' },
+  { src: '/images/gallery-equipment1.webp', fallback: '/images/gallery-equipment1.jpg', category: 'equipment', alt: 'Dumbbells closeup' },
+  { src: '/images/gallery-training2.webp', fallback: '/images/gallery-training2.jpg', category: 'training', alt: 'Battle ropes workout' },
+  { src: '/images/facility-equipment.webp', fallback: '/images/facility-equipment.jpg', category: 'equipment', alt: 'Weight room' },
+  { src: '/images/facility-cardio.webp', fallback: '/images/facility-cardio.jpg', category: 'gym', alt: 'Cardio zone' },
+  { src: '/images/facility-training.webp', fallback: '/images/facility-training.jpg', category: 'training', alt: 'Functional training area' },
+  { src: '/images/about.webp', fallback: '/images/about.jpg', category: 'gym', alt: 'Training floor' },
 ];
 
 const categories = ['All', 'Gym', 'Training', 'Equipment'];
@@ -69,11 +69,18 @@ export default function Gallery() {
                 onClick={() => setLightboxIndex(i)}
                 className="relative rounded-xl overflow-hidden cursor-pointer group aspect-square"
               >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
+                <picture>
+                  <source srcSet={img.src} type="image/webp" />
+                  <img
+                    src={img.fallback}
+                    alt={img.alt}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={448}
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-matte/0 group-hover:bg-matte/30 transition-colors duration-300" />
               </motion.div>
             ))}
